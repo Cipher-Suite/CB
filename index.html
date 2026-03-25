@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherBridge | Cloud Infrastructure for MT5 Automation</title>
+    <style>
+        /* ========== VARIABLES ========== */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #0f0f14;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-dark: #2563eb;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --spacing-3xl: 6rem;
+        }
+
+        /* ========== RESET ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+        }
+
+        .btn-secondary {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            padding: 12px 28px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========== SECTIONS ========== */
+        .section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .about-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* ========== FEATURES GRID ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .feature-card h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-light);
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-card li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* ========== STEPS ========== */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+
+        .step {
+            padding: 24px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .step h5 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* ========== AUDIENCE GRID ========== */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .audience-item {
+            background: var(--bg-card);
+            padding: 32px 24px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .audience-item p {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ========== WHY GRID ========== */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .why-item h5 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent-light);
+        }
+
+        .why-item p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* ========== CTA ========== */
+        .cta {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.02) 100%);
+            border-radius: var(--radius-lg);
+            margin: 0 0 80px;
+        }
+
+        .cta h3 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .features-grid,
+            .audience-grid,
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero h2 {
+                font-size: 20px;
+            }
+            
+            .section {
+                padding: 48px 0;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .features-grid,
+            .audience-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">CipherBridge</div>
+            <div class="nav-links">
+                <a href="#">Product</a>
+                <a href="#">Docs</a>
+                <a href="#" class="btn-outline">Get Started</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>CipherBridge</h1>
+            <h2>Cloud Infrastructure for MT5 Automation</h2>
+            <p>Securely deploy, connect, and manage MetaTrader 5 trading environments at scale.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">Get Started</a>
+                <a href="#" class="btn-secondary">View Docs</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section">
+            <div class="section-header">
+                <h3>What It Does</h3>
+            </div>
+            <p class="about-description">
+                CipherBridge is a cloud-native platform that automates the deployment and management of MetaTrader 5 environments.
+                <br><br>
+                It provides secure connectivity, real-time communication, and scalable infrastructure, allowing developers and trading platforms to integrate and control MT5 accounts without handling the underlying complexity.
+            </p>
+        </section>
+
+        <!-- Core Features -->
+        <section class="section">
+            <div class="section-header">
+                <h3>Core Features</h3>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>Automated Infrastructure</h4>
+                    <ul>
+                        <li>Instantly provision MT5 environments per user</li>
+                        <li>Docker-based isolation for each account</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Secure by Design</h4>
+                    <ul>
+                        <li>Encrypted credential storage</li>
+                        <li>Token-based authentication</li>
+                        <li>Secure WebSocket communication</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Real-Time Connectivity</h4>
+                    <ul>
+                        <li>REST API for control</li>
+                        <li>WebSocket for live data and execution</li>
+                        <li>Low-latency communication</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Scalable Architecture</h4>
+                    <ul>
+                        <li>Multi-user support</li>
+                        <li>Automatic container lifecycle management</li>
+                        <li>Designed for high availability</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section">
+            <div class="section-header">
+                <h3>How It Works</h3>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h5>Connect Account</h5>
+                    <p>User connects their MT5 account</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h5>Provision Environment</h5>
+                    <p>CipherBridge provisions a dedicated environment</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h5>Secure Registration</h5>
+                    <p>Bridge registers and connects securely</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h5>WebSocket Connection</h5>
+                    <p>WebSocket connection is established</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h5>Real-Time Communication</h5>
+                    <p>External applications can send commands and receive data in real time</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who It's For -->
+        <section class="section">
+            <div class="section-header">
+                <h3>Who It's For</h3>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-item"><p>Developers building trading bots and automation tools</p></div>
+                <div class="audience-item"><p>Trading platforms and SaaS products</p></div>
+                <div class="audience-item"><p>Signal providers and trading communities</p></div>
+                <div class="audience-item"><p>Fintech startups working with MT5</p></div>
+            </div>
+        </section>
+
+        <!-- Why CipherBridge -->
+        <section class="section">
+            <div class="section-header">
+                <h3>Why CipherBridge</h3>
+            </div>
+            <div class="why-grid">
+                <div class="why-item">
+                    <h5>⚡ Eliminates manual MT5 setup</h5>
+                    <p>No more infrastructure headaches</p>
+                </div>
+                <div class="why-item">
+                    <h5>🚀 Fully automated and scalable infrastructure</h5>
+                    <p>Grows with your needs</p>
+                </div>
+                <div class="why-item">
+                    <h5>🔒 Secure and reliable connection handling</h5>
+                    <p>Bank-level encryption and authentication</p>
+                </div>
+                <div class="why-item">
+                    <h5>💻 Built for developers and modern trading systems</h5>
+                    <p>Clean APIs and real-time data</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta">
+            <h3>Start building on top of CipherBridge today.</h3>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary">Request Access</a>
+                <a href="#" class="btn-secondary">Join Waitlist</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo">CipherBridge</div>
+            <div class="footer-links">
+                <a href="#">Docs</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+            <div class="copyright">© 2024 CipherBridge. All rights reserved.</div>
+        </footer>
+    </div>
+</body>
+</html>

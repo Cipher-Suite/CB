@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CipherBridge | Cloud Infrastructure for MT5 Automation</title>
+    <title>CipherBridge | Secure, Scalable MT5 Automation</title>
     <style>
         /* ========== VARIABLES ========== */
         :root {
@@ -17,6 +17,7 @@
             --accent: #3b82f6;
             --accent-light: #60a5fa;
             --accent-dark: #2563eb;
+            --accent-glow: rgba(59, 130, 246, 0.3);
             --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
             --radius-sm: 8px;
             --radius-md: 12px;
@@ -103,31 +104,37 @@
         .btn-primary {
             background: var(--accent);
             color: #fff;
-            padding: 12px 28px;
+            padding: 14px 32px;
             border-radius: var(--radius-sm);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-block;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 0 0 0 var(--accent-glow);
         }
 
         .btn-primary:hover {
             background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--accent-glow);
         }
 
         .btn-secondary {
             background: rgba(59, 130, 246, 0.1);
             color: var(--accent);
-            padding: 12px 28px;
+            padding: 14px 32px;
             border-radius: var(--radius-sm);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-block;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
         .btn-secondary:hover {
             background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-2px);
         }
 
         /* ========== HERO ========== */
@@ -137,7 +144,7 @@
         }
 
         .hero h1 {
-            font-size: 64px;
+            font-size: 56px;
             font-weight: 800;
             margin-bottom: 16px;
             background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
@@ -146,11 +153,12 @@
             background-clip: text;
         }
 
-        .hero h2 {
-            font-size: 24px;
+        .hero .tagline {
+            font-size: 28px;
             font-weight: 500;
             color: var(--text-secondary);
             margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
 
         .hero p {
@@ -162,7 +170,7 @@
 
         .hero-buttons {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -182,6 +190,11 @@
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
         }
 
         .about-description {
@@ -205,6 +218,18 @@
             padding: 32px;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            display: inline-block;
         }
 
         .feature-card h4 {
@@ -221,16 +246,18 @@
 
         .feature-card li {
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             padding-left: 20px;
             position: relative;
+            font-size: 14px;
         }
 
         .feature-card li::before {
-            content: "→";
+            content: "✓";
             position: absolute;
             left: 0;
             color: var(--accent);
+            font-weight: bold;
         }
 
         /* ========== STEPS ========== */
@@ -259,14 +286,14 @@
         }
 
         .step h5 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 8px;
         }
 
         .step p {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         /* ========== AUDIENCE GRID ========== */
@@ -282,11 +309,24 @@
             border-radius: var(--radius-md);
             border: 1px solid var(--border);
             text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .audience-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .audience-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: inline-block;
         }
 
         .audience-item p {
             color: var(--text-secondary);
             font-weight: 500;
+            font-size: 14px;
         }
 
         /* ========== WHY GRID ========== */
@@ -299,10 +339,25 @@
         .why-item {
             text-align: center;
             padding: 24px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .why-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .why-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: inline-block;
         }
 
         .why-item h5 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             margin-bottom: 12px;
             color: var(--accent-light);
@@ -330,7 +385,7 @@
 
         .cta-buttons {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -392,10 +447,10 @@
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 40px;
+                font-size: 36px;
             }
             
-            .hero h2 {
+            .hero .tagline {
                 font-size: 20px;
             }
             
@@ -422,6 +477,10 @@
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .cta h3 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
@@ -440,10 +499,10 @@
         <!-- Hero Section -->
         <section class="hero">
             <h1>CipherBridge</h1>
-            <h2>Cloud Infrastructure for MT5 Automation</h2>
+            <div class="tagline">Secure, Scalable MT5 Automation</div>
             <p>Securely deploy, connect, and manage MetaTrader 5 trading environments at scale.</p>
             <div class="hero-buttons">
-                <a href="#" class="btn-primary">Get Started</a>
+                <a href="#" class="btn-primary">Get Started →</a>
                 <a href="#" class="btn-secondary">View Docs</a>
             </div>
         </section>
@@ -467,13 +526,15 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
                     <h4>Automated Infrastructure</h4>
                     <ul>
-                        <li>Instantly provision MT5 environments per user</li>
-                        <li>Docker-based isolation for each account</li>
+                        <li>Provision MT5 environments instantly</li>
+                        <li>Docker-based isolation per account</li>
                     </ul>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
                     <h4>Secure by Design</h4>
                     <ul>
                         <li>Encrypted credential storage</li>
@@ -482,19 +543,21 @@
                     </ul>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
                     <h4>Real-Time Connectivity</h4>
                     <ul>
                         <li>REST API for control</li>
-                        <li>WebSocket for live data and execution</li>
-                        <li>Low-latency communication</li>
+                        <li>WebSocket for live data</li>
+                        <li>Low-latency execution</li>
                     </ul>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">📈</div>
                     <h4>Scalable Architecture</h4>
                     <ul>
                         <li>Multi-user support</li>
-                        <li>Automatic container lifecycle management</li>
-                        <li>Designed for high availability</li>
+                        <li>Automatic container lifecycle</li>
+                        <li>High availability design</li>
                     </ul>
                 </div>
             </div>
@@ -509,27 +572,27 @@
                 <div class="step">
                     <div class="step-number">1</div>
                     <h5>Connect Account</h5>
-                    <p>User connects their MT5 account</p>
+                    <p>User connects MT5 account</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <h5>Provision Environment</h5>
-                    <p>CipherBridge provisions a dedicated environment</p>
+                    <p>Dedicated container spins up</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <h5>Secure Registration</h5>
-                    <p>Bridge registers and connects securely</p>
+                    <p>Bridge registers with gateway</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <h5>WebSocket Connection</h5>
-                    <p>WebSocket connection is established</p>
+                    <p>Persistent secure channel</p>
                 </div>
                 <div class="step">
                     <div class="step-number">5</div>
                     <h5>Real-Time Communication</h5>
-                    <p>External applications can send commands and receive data in real time</p>
+                    <p>Commands and data flow instantly</p>
                 </div>
             </div>
         </section>
@@ -540,10 +603,22 @@
                 <h3>Who It's For</h3>
             </div>
             <div class="audience-grid">
-                <div class="audience-item"><p>Developers building trading bots and automation tools</p></div>
-                <div class="audience-item"><p>Trading platforms and SaaS products</p></div>
-                <div class="audience-item"><p>Signal providers and trading communities</p></div>
-                <div class="audience-item"><p>Fintech startups working with MT5</p></div>
+                <div class="audience-item">
+                    <div class="audience-icon">🤖</div>
+                    <p>Developers building trading bots</p>
+                </div>
+                <div class="audience-item">
+                    <div class="audience-icon">🏢</div>
+                    <p>Trading platforms & SaaS</p>
+                </div>
+                <div class="audience-item">
+                    <div class="audience-icon">📡</div>
+                    <p>Signal providers & communities</p>
+                </div>
+                <div class="audience-item">
+                    <div class="audience-icon">🚀</div>
+                    <p>Fintech startups</p>
+                </div>
             </div>
         </section>
 
@@ -554,29 +629,33 @@
             </div>
             <div class="why-grid">
                 <div class="why-item">
-                    <h5>⚡ Eliminates manual MT5 setup</h5>
+                    <div class="why-icon">⚡</div>
+                    <h5>Eliminates manual MT5 setup</h5>
                     <p>No more infrastructure headaches</p>
                 </div>
                 <div class="why-item">
-                    <h5>🚀 Fully automated and scalable infrastructure</h5>
+                    <div class="why-icon">🚀</div>
+                    <h5>Fully automated & scalable</h5>
                     <p>Grows with your needs</p>
                 </div>
                 <div class="why-item">
-                    <h5>🔒 Secure and reliable connection handling</h5>
-                    <p>Bank-level encryption and authentication</p>
+                    <div class="why-icon">🔒</div>
+                    <h5>Secure & reliable</h5>
+                    <p>Bank-level encryption</p>
                 </div>
                 <div class="why-item">
-                    <h5>💻 Built for developers and modern trading systems</h5>
-                    <p>Clean APIs and real-time data</p>
+                    <div class="why-icon">💻</div>
+                    <h5>Built for developers</h5>
+                    <p>Clean APIs, real-time data</p>
                 </div>
             </div>
         </section>
 
         <!-- Call to Action -->
         <div class="cta">
-            <h3>Start building on top of CipherBridge today.</h3>
+            <h3>Start building on CipherBridge today.</h3>
             <div class="cta-buttons">
-                <a href="#" class="btn-primary">Request Access</a>
+                <a href="#" class="btn-primary">Request Access →</a>
                 <a href="#" class="btn-secondary">Join Waitlist</a>
             </div>
         </div>
